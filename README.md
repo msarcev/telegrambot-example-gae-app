@@ -1,6 +1,54 @@
-# TelegramBot
-Telegram Bot Java Library to deploy on GAE
+##  Java API for [Telegram Bots][1] on GAE
 
-Telegram bot requests
-done with webhook method on Spring MVC webapp 
-deployed to Google App Engine
+Build up using libraries from nixtabyte/JTeleBot-Core
+Uses webhook method wrapped in a Spring MVC controller
+Can make telegram requests easily
+Telegram bot API Full support 
+Deploy on Google App Engine
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ [1]: https://core.telegram.org/bots
