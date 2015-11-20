@@ -22,6 +22,7 @@ import org.telebot.nixtabyte.jtelebot.response.json.Update;
 public class SimpleSpringController {
 		
 	private String message = "Home Page";
+	final static CommandDispatcher dispatcher = new CommandDispatcher();
 	
 	 @RequestMapping(value="/", method = RequestMethod.GET)
 	    public String index(ModelMap model) throws JsonParsingException {
@@ -42,7 +43,7 @@ public class SimpleSpringController {
 	 
 	 @RequestMapping(value="URL/WEBHOOK", method = RequestMethod.POST, consumes="application/json")
 	 public ResponseEntity<String> request(@RequestBody Update update) throws IOException, JsonParsingException{ 		 
-		 	new CommandDispatcher(update);
+		 	dispatcher.processCommand(update);
 		    return new ResponseEntity<String>(HttpStatus.OK) ;		      
 	    }
 	 

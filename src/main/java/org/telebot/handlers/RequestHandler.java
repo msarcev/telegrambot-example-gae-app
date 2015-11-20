@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -15,27 +16,28 @@ import org.telebot.config.BotConfig;
 import org.telebot.nixtabyte.jtelebot.response.json.TelegramResponse;
 import org.telebot.request.TelegramRequest;
 
+
 public class RequestHandler {
 	
-	private TelegramRequest request;
-	private TelegramResponse<?> response = null;
+    private TelegramResponse<?> response = null;
 	private HttpURLConnection connection = null;  
-	private URL url;   
-	private String urlString;
-	private String parametersString;
+	private URL url;    
     
+	public RequestHandler(){};
 	public RequestHandler(TelegramRequest request){
-		this.setRequest(request);
-		urlString = MessageFormat.format(BotConfig.getUrlTemplate(), BotConfig.getToken(), request.getRequestType().getMethodName());
-		Iterator<BasicNameValuePair> iterator = request.getParameters().iterator();
+		executeRequest(request);
+	}
+	
+	public TelegramResponse<?> executeRequest(TelegramRequest request){
+		
+		String urlString = MessageFormat.format(BotConfig.getUrlTemplate(), BotConfig.getToken(), request.getRequestType().getMethodName());
+		String parametersString = "";
+		List<BasicNameValuePair> parameters =  request.getParameters();
+		Iterator<BasicNameValuePair> iterator = parameters.iterator();
 		while (iterator.hasNext()){
 			BasicNameValuePair nextPair = iterator.next();
 			parametersString = parametersString + nextPair.getName() + "=" + nextPair.getValue() + "&";
 		}
-	}
-	
-	public TelegramResponse<?> executeRequest(){		 
-		
 		try {
 			 //Create connection
 		      url = new URL(urlString);
@@ -82,12 +84,4 @@ public class RequestHandler {
 		}	
 	}
 }
-
-	public TelegramRequest getRequest() {
-		return request;
-	}
-
-	public void setRequest(TelegramRequest request) {
-		this.request = request;
-	}
 }
