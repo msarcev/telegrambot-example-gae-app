@@ -1,4 +1,4 @@
-package org.spring.controllers;
+package org.controllers;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -19,7 +19,7 @@ import org.telebot.nixtabyte.jtelebot.requestfactory.TelegramRequestFactory;
 import org.telebot.nixtabyte.jtelebot.response.json.Update;
 
 @Controller
-public class SimpleSpringController {
+public class MainController {
 		
 	private String message = "Home Page";
 	final static CommandDispatcher dispatcher = new CommandDispatcher();
